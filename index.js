@@ -25,12 +25,19 @@ const typeDefs = gql`
 
   type Query {
     movies: [Movie]
+    movie(id: ID): Movie
   }
 `;
 
 const movies = [
-  { title: "5 Deadly Venoms", releaseDate: "10-10-1983", rating: 5 },
   {
+    id: "dasf",
+    title: "5 Deadly Venoms",
+    releaseDate: "10-10-1983",
+    rating: 5
+  },
+  {
+    id: "asfsf",
     title: "36th Chamber",
     releaseDate: "10-10-1983",
     rating: 5,
@@ -42,6 +49,9 @@ const resolvers = {
   Query: {
     movies: () => {
       return movies;
+    },
+    movie: (obj, { id }, context, info) => {
+      return movies.find(m => m.id === id);
     }
   }
 };
