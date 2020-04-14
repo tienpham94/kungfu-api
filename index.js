@@ -5,6 +5,7 @@ const typeDefs = gql`
     title: String
     releaseDate: String
     rating: Int
+    # FKiat, Boolean
   }
 
   type Query {
