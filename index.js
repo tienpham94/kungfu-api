@@ -33,6 +33,13 @@ const typeDefs = gql`
   }
 `;
 
+const actors = [
+  {
+    id: "gordon",
+    name: "Gordon Liu"
+  }
+];
+
 const movies = [
   {
     id: "dasf",
@@ -45,7 +52,7 @@ const movies = [
     title: "36th Chamber",
     releaseDate: new Date("10-10-1983"),
     rating: 5,
-    actor: [{ id: "asfasfd", name: "Gordon Liu" }]
+    actor: [{ id: "gordon" }]
   }
 ];
 
@@ -56,6 +63,13 @@ const resolvers = {
     },
     movie: (obj, { id }, context, info) => {
       return movies.find(m => m.id === id);
+    }
+  },
+  Movie: {
+    actor: (obj, arg, context) => {
+      console.log(obj);
+      const actorIds = obj.actor.map(a => a.id);
+      return actors.filter(actor => actorIds.includes(actor.id));
     }
   },
   Date: new GraphQLScalarType({
