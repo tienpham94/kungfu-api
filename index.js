@@ -31,6 +31,10 @@ const typeDefs = gql`
     movies: [Movie]
     movie(id: ID): Movie
   }
+
+  type Mutation {
+    addMovie(title: String, releaseDate: Date, id: ID): [Movie]
+  }
 `;
 
 const actors = [
@@ -72,6 +76,13 @@ const resolvers = {
       return actors.filter(actor => actorIds.includes(actor.id));
     }
   },
+  Mutation: {
+    addMovie: (obj, args, context) => {
+      const newMoviesList = [...movies, { ...args }];
+      return newMoviesList;
+    }
+  },
+
   Date: new GraphQLScalarType({
     name: "Date",
     description: "it's a date",
