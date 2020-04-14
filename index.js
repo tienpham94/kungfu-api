@@ -6,9 +6,21 @@ const typeDefs = gql`
     releaseDate: String
     rating: Int
   }
+
+  type Query {
+    movies: [Movie]
+  }
 `;
 
 const movies = [
   { title: "5 Deadly Venoms", releaseDate: "10-10-1983", rating: 5 },
   { title: "36th Chamber", releaseDate: "10-10-1983", rating: 5 }
 ];
+
+const resolvers = {
+  Query: {
+    movies: () => {
+      return movies;
+    }
+  }
+};
