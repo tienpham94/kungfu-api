@@ -90,9 +90,12 @@ const resolvers = {
     }
   },
   Mutation: {
-    addMovie: (obj, { movie }, context) => {
-      const newMoviesList = [...movies, movie];
-      return newMoviesList;
+    addMovie: (obj, { movie }, { userId }) => {
+      if (userId) {
+        const newMoviesList = [...movies, movie];
+        return newMoviesList;
+      }
+      return movies;
     }
   },
 
@@ -116,7 +119,15 @@ const resolvers = {
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  playground: true,
+  introspection: true,
+  context: ({ req }) => {
+    const fakeUser = {
+      userId: "hello"
+    };
+    return fakeUser;
+  }
 });
 
 server.listen().then(({ url }) => console.log(`server started at ${url}`));
