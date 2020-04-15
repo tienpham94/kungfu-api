@@ -4,6 +4,11 @@ const { Kind } = require("graphql/language");
 
 // gql`` parses your string into AST
 const typeDefs = gql`
+  fragment Meta on Movie {
+    releaseDate
+    rating
+  }
+
   scalar Date
 
   enum Status {
