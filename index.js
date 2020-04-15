@@ -2,6 +2,7 @@ const { ApolloServer, gql } = require("apollo-server");
 const { GraphQLScalarType } = require("graphql");
 const { Kind } = require("graphql/language");
 
+// gql`` parses your string into AST
 const typeDefs = gql`
   scalar Date
 
